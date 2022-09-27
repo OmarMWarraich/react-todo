@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaTrash } from 'react-icons/fa';
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
@@ -52,7 +53,9 @@ const TodoItem = (props) => {
           onChange={() => props.handleChangeProps(id)}
         />
         {/* eslint-disable-next-line react/destructuring-assignment */}
-        <button type="button" onClick={() => props.deleteTodoProps(id)}>Delete</button>
+        <button type="button" onClick={() => props.deleteTodoProps(id)}>
+          <FaTrash />
+        </button>
         <span style={completed ? completedStyle : null}>{title}</span>
       </div>
       <input
