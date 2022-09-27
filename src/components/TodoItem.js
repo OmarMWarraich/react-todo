@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function TodoItem(props) {
-  const { todo } = props;
-  return <li>{todo.title}</li>;
+// eslint-disable-next-line react/prefer-stateless-function
+export default class TodoItem extends Component {
+  render() {
+    const { todo } = this.props;
+    return (
+      <li>{todo.title}</li>
+    );
+  }
 }
-
-export default TodoItem;
