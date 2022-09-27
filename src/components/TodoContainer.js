@@ -34,7 +34,7 @@ class TodoContainer extends React.Component {
       return (
         <div>
           <Header />
-          <TodosList todos={todos} />
+          <TodosList todos={todos} handleChangeProps={this.handleChange} />
         </div>
       );
     }
