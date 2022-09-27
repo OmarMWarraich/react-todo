@@ -1,4 +1,9 @@
 import React from 'react';
 
-const About = () => <div>hello from about page</div>;
+/* eslint-disable-next-lint no-unused-vars */
+const About = () => (
+  <div>
+    <h1>About</h1>
+  </div>
+);
 export default About;
