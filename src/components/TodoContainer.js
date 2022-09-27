@@ -26,8 +26,15 @@ class TodoContainer extends React.Component {
     };
 
     handleChange = (id) => {
-    //   const { todos } = this.state;
-      console.log('clicked', id);
+      this.setState({
+        /* eslint-disable-next-line react/destructuring-assignment */
+        todos: this.state.todos.map((todo) => {
+          if (todo.id === id) {
+            todo.completed = !todo.completed;
+          }
+          return todo;
+        }),
+      });
     };
 
     render() {
