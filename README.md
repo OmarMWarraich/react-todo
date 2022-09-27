@@ -14,7 +14,7 @@
 
 ## Live Demo 
 
-Coming Soon
+[Click here](http://cryptoova.me/react-todo/)
 
 ## Getting Started
 
