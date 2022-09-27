@@ -6,7 +6,11 @@ export default class TodoItem extends Component {
     const { todo } = this.props;
     return (
       <li>
-        <input type="checkbox" checked={todo.completed} />
+        <input
+          type="checkbox"
+          checked={todo.completed}
+          onChange={() => console.log('You clicked me')}
+        />
         {todo.title}
       </li>
     );
