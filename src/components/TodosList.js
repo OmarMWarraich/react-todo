@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TodoItem from './TodoItem';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class TodosList extends Component {
@@ -7,7 +8,7 @@ export default class TodosList extends Component {
     return (
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+          <TodoItem key={todo.id} todo={todo} />
         ))}
       </ul>
     );
