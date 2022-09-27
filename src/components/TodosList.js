@@ -15,6 +15,8 @@ export default class TodosList extends Component {
             handleChangeProps={this.props.handleChangeProps}
             /* eslint-disable-next-line react/destructuring-assignment */
             deleteTodoProps={this.props.deleteTodoProps}
+            /* eslint-disable-next-line react/destructuring-assignment */
+            setUpdate={this.props.setUpdate}
           />
         ))}
       </ul>
