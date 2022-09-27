@@ -1,91 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import TodosList from './TodosList';
 import Header from './Header';
 import InputTodo from './InputTodo';
+import TodosList from './TodosList';
 
-// eslint-disable-next-line react/prefer-stateless-function
-class TodoContainer extends React.Component {
-    // eslint-disable-next-line react/state-in-constructor
-    state = {
-      todos: [],
-    };
+const TodoContainer = () => {
+  const getInitialTodos = () => {
+    // getting stored items
+    const temp = localStorage.getItem('todos');
+    const savedTodos = JSON.parse(temp);
+    return savedTodos || [];
+  };
+  const [todos, setTodos] = useState(getInitialTodos());
 
-    componentDidMount() {
-      const temp = localStorage.getItem('todos');
-      const loadedTodos = JSON.parse(temp);
-      if (loadedTodos) {
-        this.setState({
-          todos: loadedTodos,
-        });
+  const handleChange = (id) => {
+    setTodos((prevState) => prevState.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          completed: !todo.completed,
+        };
       }
-    }
+      return todo;
+    }));
+  };
 
-    componentDidUpdate(prevProps, prevState) {
-      /* eslint-disable-next-line react/destructuring-assignment */
-      if (prevState.todos !== this.state.todos) {
-        /* eslint-disable-next-line react/destructuring-assignment */
-        const temp = JSON.stringify(this.state.todos);
-        localStorage.setItem('todos', temp);
-      }
-    }
+  const delTodo = (id) => {
+    setTodos([
+      ...todos.filter((todo) => todo.id !== id),
+    ]);
+    localStorage.setItem('todos', JSON.stringify([...todos.filter((todo) => todo.id !== id)]));
+  };
 
-    componentWillUnmount() {
-      console.log('Cleaning up...');
-    }
-
-    delTodo = (id) => {
-      this.setState({
-        todos: [
-        /* eslint-disable */
-          ...this.state.todos.filter((todo) => todo.id !== id),
-        /* eslint-enable */
-        ],
-      });
+  const addTodoItem = (title) => {
+    const newTodo = {
+      id: uuidv4(),
+      title,
+      completed: false,
     };
+    setTodos([...todos, newTodo]);
+    localStorage.setItem('todos', JSON.stringify([...todos, newTodo]));
+  };
 
-    addTodoItem = (title) => {
-      /* eslint-disable */
-      const newTodo = {
-        id: uuidv4(),
-        title,
-        completed: false,
-      };
-      this.setState({
-        todos: [...this.state.todos, newTodo],
-      });
-        /* eslint-enable */
-    };
+  const setUpdate = (updatedTitle, id) => {
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          /* eslint-disable-next-line no-param-reassign */
+          todo.title = updatedTitle;
+        }
+        return todo;
+      }),
+    );
+    localStorage.setItem('todos', JSON.stringify(todos));
+  };
 
-    setUpdate = (updatedTitle, id) => {
-      this.setState({
-        /* eslint-disable */
-        todos: this.state.todos.map((todo) => {
-          if (todo.id === id) {
-            todo.title = updatedTitle;
-          }
-          return todo;
-        }),
-        /* eslint-enable */
-      });
-    }
+  return (
+    <div className="container">
+      <div className="inner">
+        <Header />
+        <InputTodo addTodoProps={addTodoItem} />
+        <TodosList
+          todos={todos}
+          handleChangeProps={handleChange}
+          deleteTodoProps={delTodo}
+          setUpdate={setUpdate}
+        />
+      </div>
+    </div>
+  );
+};
 
-    render() {
-      const { todos } = this.state;
-      return (
-        <div className="container">
-          <div className="inner">
-            <Header />
-            <InputTodo addTodoProps={this.addTodoItem} />
-            <TodosList
-              todos={todos}
-              handleChangeProps={this.handleChange}
-              deleteTodoProps={this.delTodo}
-              setUpdate={this.setUpdate}
-            />
-          </div>
-        </div>
-      );
-    }
-}
 export default TodoContainer;
