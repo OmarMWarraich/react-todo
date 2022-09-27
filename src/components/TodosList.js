@@ -4,11 +4,17 @@ import TodoItem from './TodoItem';
 // eslint-disable-next-line react/prefer-stateless-function
 export default class TodosList extends Component {
   render() {
-    const { todos } = this.props;
+    // const { todos } = this.props;
     return (
       <ul>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
+        {/* eslint-disable-next-line react/destructuring-assignment */}
+        {this.props.todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            /* eslint-disable-next-line react/destructuring-assignment */
+            handleChangeProps={this.props.handleChangeProps}
+          />
         ))}
       </ul>
     );

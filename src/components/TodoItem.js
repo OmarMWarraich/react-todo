@@ -3,15 +3,18 @@ import React, { Component } from 'react';
 // eslint-disable-next-line react/prefer-stateless-function
 export default class TodoItem extends Component {
   render() {
-    const { todo } = this.props;
+    // const { todo } = this.props;
     return (
       <li>
         <input
           type="checkbox"
-          checked={todo.completed}
-          onChange={() => console.log('You clicked me')}
+          /* eslint-disable-next-line react/destructuring-assignment */
+          checked={this.props.todo.completed}
+          /* eslint-disable-next-line react/destructuring-assignment */
+          onChange={() => this.props.handleChangeProps(this.props.todo.id)}
         />
-        {todo.title}
+        {/* eslint-disable-next-line react/destructuring-assignment */}
+        {this.props.todo.title}
       </li>
     );
   }
