@@ -4,7 +4,6 @@ import TodoItem from './TodoItem';
 // eslint-disable-next-line react/prefer-stateless-function
 export default class TodosList extends Component {
   render() {
-    // const { todos } = this.props;
     return (
       <ul>
         {/* eslint-disable-next-line react/destructuring-assignment */}
@@ -14,6 +13,8 @@ export default class TodosList extends Component {
             todo={todo}
             /* eslint-disable-next-line react/destructuring-assignment */
             handleChangeProps={this.props.handleChangeProps}
+            /* eslint-disable-next-line react/destructuring-assignment */
+            deleteTodoProps={this.props.deleteTodoProps}
           />
         ))}
       </ul>
