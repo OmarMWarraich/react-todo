@@ -5,7 +5,10 @@ export default class TodoItem extends Component {
   render() {
     const { todo } = this.props;
     return (
-      <li>{todo.title}</li>
+      <li>
+        <input type="checkbox" />
+        {todo.title}
+      </li>
     );
   }
 }
