@@ -16,10 +16,15 @@ class InputTodo extends Component {
     handleSubmit = (e) => {
       e.preventDefault();
       /* eslint-disable-next-line react/destructuring-assignment */
-      this.props.addTodoProps(this.state.title);
-      this.setState({
-        title: '',
-      });
+      if (this.state.title.trim()) {
+      /* eslint-disable-next-line react/destructuring-assignment */
+        this.props.addTodoProps(this.state.title);
+        this.setState({
+          title: '',
+        });
+      } else {
+        alert('Please write item');
+      }
     };
 
     render() {
